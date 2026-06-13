@@ -1,0 +1,39 @@
+# Environment
+.env
+
+# Composer
+/vendor/
+
+# Node
+node_modules/
+
+# Craft Storage
+/storage/*
+!/storage/.gitignore
+
+# Runtime
+/runtime/
+
+# Logs
+*.log
+
+# IDE Files
+.idea/
+.vscode/
+*.swp
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Build Files
+dist/
+build/
+
+# PHPUnit
+.phpunit.result.cache
+
+# Yarn/NPM Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
