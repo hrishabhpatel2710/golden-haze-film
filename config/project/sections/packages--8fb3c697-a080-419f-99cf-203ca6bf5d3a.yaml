@@ -1,0 +1,22 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 7596e94a-2475-42ee-9703-689983d5b3b7 # Packages
+handle: packages
+maxAuthors: 1
+minAuthors: 1
+name: Packages
+previewTargets:
+  -
+    label: 'Primary entry page'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  6e103d22-79eb-4df8-ab84-3faf315eeeab: # Golden Haze
+    enabledByDefault: true
+    hasUrls: true
+    template: packages/_entry.twig
+    uriFormat: 'packages/{slug}'
+type: channel

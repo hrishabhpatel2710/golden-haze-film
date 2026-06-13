@@ -1,0 +1,244 @@
+{% extends '_layouts/main.twig' %}
+{% import '_macros.twig' as macros %}
+
+{% set projectVideos = entry.videos.all() %}
+{% set projectImages = entry.images.all() %}
+{% set projectPage = craft.entries().section('projectPage').one() %}
+
+{% block title %}{{ entry.title }} — Golden Haze Films{% endblock %}
+{% block metaDescription %}{{ entry.summary|default('Project by Golden Haze Films.') }}{% endblock %}
+
+{% block content %}
+<section id="project-detail">
+  <div class="project-detail-hero">
+    <a href="{{ projectPage ? projectPage.url : '/' }}" class="project-detail-back reveal">← All Projects</a>
+
+    {% if entry.projectType %}
+      <div class="section-label section-label--center reveal">{{ entry.projectType }}</div>
+    {% endif %}
+
+    <h1 class="project-detail-title reveal reveal-delay-1">{{ entry.title }}</h1>
+
+    {% if entry.summary %}
+      <p class="project-detail-summary reveal reveal-delay-2">{{ entry.summary }}</p>
+    {% endif %}
+  </div>
+
+  {% if projectVideos|length %}
+    <div class="project-detail-videos reveal">
+      <div class="section-label section-label--center">Films</div>
+
+      <div class="project-video-player" id="projectVideoPlayer" data-sources="{{ projectVideos|map(v => v.getUrl())|json_encode|e('html_attr') }}">
+        <div class="project-video-stage">
+          <video
+            id="projectVideo"
+            class="project-video-el"
+            playsinline
+            preload="metadata"
+          ></video>
+
+          <div class="project-video-overlay" id="projectVideoOverlay">
+            <button type="button" class="project-video-play-big" id="projectVideoPlayBig" aria-label="Play video">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+
+          {% if projectVideos|length > 1 %}
+            <div class="project-video-nav">
+              <button type="button" class="project-video-nav-btn" id="projectVideoPrev" aria-label="Previous video">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14l5-5 5 5z"/></svg>
+              </button>
+              <button type="button" class="project-video-nav-btn" id="projectVideoNext" aria-label="Next video">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+              </button>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="project-video-controls">
+          <button type="button" class="project-video-ctrl" id="projectVideoPlayPause" aria-label="Play">
+            <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+
+          <div class="project-video-progress-wrap">
+            <input type="range" class="project-video-progress" id="projectVideoProgress" min="0" max="100" step="0.1" value="0" aria-label="Seek">
+            <div class="project-video-progress-track">
+              <div class="project-video-progress-fill" id="projectVideoProgressFill"></div>
+            </div>
+          </div>
+
+          <span class="project-video-time" id="projectVideoTime">0:00 / 0:00</span>
+
+          <button type="button" class="project-video-ctrl" id="projectVideoMute" aria-label="Mute">
+            <svg class="icon-volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+            <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          </button>
+
+          <input type="range" class="project-video-volume" id="projectVideoVolume" min="0" max="1" step="0.05" value="1" aria-label="Volume">
+
+          <button type="button" class="project-video-ctrl" id="projectVideoFullscreen" aria-label="Fullscreen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+          </button>
+
+          {% if projectVideos|length > 1 %}
+            <span class="project-video-counter" id="projectVideoCounter">1 / {{ projectVideos|length }}</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="project-video-grid">
+        {% for video in projectVideos %}
+          <button
+            type="button"
+            class="project-video-thumb{{ loop.first ? ' is-active' : '' }}"
+            data-index="{{ loop.index0 }}"
+            data-src="{{ video.getUrl() }}"
+            aria-label="Play {{ video.title|default('Video ' ~ loop.index) }}"
+          >
+            <span class="project-video-thumb-media">
+              <video
+                class="project-video-thumb-video"
+                src="{{ video.getUrl() }}"
+                muted
+                playsinline
+                preload="metadata"
+                aria-hidden="true"
+              ></video>
+              <span class="project-video-thumb-play">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+            </span>
+            <span class="project-video-thumb-label">{{ video.title|default('Film ' ~ loop.index) }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if projectImages|length %}
+    <div class="project-detail-gallery">
+      <div class="section-label section-label--center reveal">Gallery</div>
+      <div class="project-gallery-grid">
+        {% for image in projectImages %}
+          {% set delay = loop.index0 % 3 %}
+          <figure class="project-gallery-item {{ delay == 0 ? 'reveal' : 'reveal reveal-delay-' ~ delay }}">
+            <div class="project-gallery-frame">
+              <img
+                src="{{ image.getUrl({ width: 900, mode: 'crop', quality: 90 }) }}"
+                srcset="{{ image.getUrl({ width: 900, mode: 'crop', quality: 90 }) }} 1x, {{ image.getUrl({ width: 1800, mode: 'crop', quality: 90 }) }} 2x"
+                alt="{{ image.title|default(entry.title ~ ' — image ' ~ loop.index) }}"
+                loading="lazy"
+              >
+            </div>
+          </figure>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<!-- =============================================
+     CONTACT CTA + FORM
+     ============================================= -->
+<section id="contact-cta">
+  <div class="contact-cta-inner">
+    <div class="cta-left">
+      <div class="section-label reveal">Get In Touch</div>
+      <h2 class="cta-h2 reveal reveal-delay-1">
+        Let's Create<br>
+        <em>Something<br>Extraordinary</em>
+      </h2>
+      <p class="cta-sub reveal reveal-delay-2">Every great story begins with a conversation. Reach out to our team and let us understand your vision — we will bring it to life with Golden craftsmanship.</p>
+
+      <div class="contact-links reveal reveal-delay-3">
+        <a href="tel:+918349820587" class="contact-link">
+          <div class="contact-link-icon">📞</div>
+          <span>+91 8349820587</span>
+        </a>
+        <a href="mailto:filmsgoldenhaze@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          <span>filmsgoldenhaze@gmail.com</span>
+        </a>
+        <a href="https://instagram.com/goldenhazefilms" class="contact-link">
+          <div class="contact-link-icon">{{ macros.instagramIcon() }}</div>
+          <span>@goldenhazefilms</span>
+        </a>
+        <a href="https://wa.me/918349820587" class="contact-link">
+          <div class="contact-link-icon">{{ macros.whatsappIcon() }}</div>
+          <span>WhatsApp Us</span>
+        </a>
+        <div class="contact-link">
+          <div class="contact-link-icon">📍</div>
+          <span>Jabalpur, Madhya Pradesh, India</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap reveal reveal-delay-2">
+      <form class="contact-form" id="contact-form" method="post" accept-charset="UTF-8">
+        {{ csrfInput() }}
+        {{ actionInput('contactform/submit/send') }}
+        {{ redirectInput(craft.app.request.url|split('#')|first ~ '#contact-cta') }}
+
+        {% if craft.app.session.hasFlash('contactSuccess') %}
+          <div class="form-notice form-notice--success">✦ Message sent — we'll be in touch soon.</div>
+        {% endif %}
+        {% if craft.app.session.hasFlash('contactError') %}
+          <div class="form-notice form-notice--error">{{ craft.app.session.getFlash('contactError') }}</div>
+        {% endif %}
+
+        <h3 class="form-title">Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Aarav" required value="{{ craft.app.request.getBodyParam('firstName') }}">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Sharma" required value="{{ craft.app.request.getBodyParam('lastName') }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+91 98765 43210" required value="{{ craft.app.request.getBodyParam('phoneNumber') }}">
+          </div>
+          <div class="form-group">
+            <label for="emailAddress">Email Address</label>
+            <input type="email" id="emailAddress" name="emailAddress" placeholder="hello@example.com" required value="{{ craft.app.request.getBodyParam('emailAddress') }}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="serviceInterestedIn">Service Interested In</label>
+          <select id="serviceInterestedIn" name="serviceInterestedIn">
+            <option value="">Select a Service</option>
+            {% set selectedService = craft.app.request.getBodyParam('serviceInterestedIn') %}
+            <option value="Wedding Videography"{{ selectedService == 'Wedding Videography' ? ' selected' : '' }}>Wedding Videography</option>
+            <option value="Wedding Photography"{{ selectedService == 'Wedding Photography' ? ' selected' : '' }}>Wedding Photography</option>
+            <option value="Pre-Wedding Shoot"{{ selectedService == 'Pre-Wedding Shoot' ? ' selected' : '' }}>Pre-Wedding Shoot</option>
+            <option value="Video Editing"{{ selectedService == 'Video Editing' ? ' selected' : '' }}>Video Editing</option>
+            <option value="Album Designing"{{ selectedService == 'Album Designing' ? ' selected' : '' }}>Album Designing</option>
+            <option value="Brand Development"{{ selectedService == 'Brand Development' ? ' selected' : '' }}>Brand Development</option>
+            <option value="Graphic Design"{{ selectedService == 'Graphic Design' ? ' selected' : '' }}>Graphic Design</option>
+            <option value="Web Development"{{ selectedService == 'Web Development' ? ' selected' : '' }}>Web Development</option>
+            <option value="Commercial Shoot"{{ selectedService == 'Commercial Shoot' ? ' selected' : '' }}>Commercial Shoot</option>
+            <option value="Social Media Content"{{ selectedService == 'Social Media Content' ? ' selected' : '' }}>Social Media Content</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="yourMessage">Your Message</label>
+          <textarea id="yourMessage" name="yourMessage" placeholder="Tell us about your vision, event date, or any specific requirements…">{{ craft.app.request.getBodyParam('yourMessage') }}</textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{% if projectVideos|length %}
+<script src="/js/project-detail.js"></script>
+{% endif %}
+{% endblock %}

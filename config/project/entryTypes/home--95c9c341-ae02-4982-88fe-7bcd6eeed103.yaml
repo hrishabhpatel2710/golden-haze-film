@@ -1,0 +1,150 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  9fbb94f5-673c-4b43-95d3-8a219a91459b:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2026-06-13T05:14:15+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: b52bd583-79ab-4c48-b161-587dd3135a84
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:29:34+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 66b34eef-279d-4db8-a87b-cbe25e7187ff # Hero
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1a1ef472-6c3e-4ac0-be12-98b42888efde
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:29:34+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: d14877ea-83bf-4965-ae14-02a722d11113 # Image Content
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2e59472d-8fd1-4567-8f54-77d644920de3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:33:29+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 6f3e33fa-42ca-4eb3-9f4c-80e83062e3ab # Icon Cards
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2b3280f9-f825-43db-9511-137499a7b110
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:46:06+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b38eebaa-5248-4ca6-8753-a8b2c12ad71e # Packeges
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ccce91cd-b0f4-4983-8263-5bd348d16cd4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:46:06+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 4b537a4c-c1e6-4a03-ba1d-4b998674d552 # Projects
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b01ae2b7-c757-4188-86fa-66507933db12
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:46:06+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: fe9246e6-e3bf-4ea8-a95f-6b7739f596ed # Testimonials
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 84e9c2aa-df2e-4b39-8907-f95eea4875ae
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: bc4f0fbf-e382-408f-9174-1319d41a347f
+        userCondition: null
+    thumbFieldKey: null
+handle: home
+hasTitleField: true
+icon: null
+name: Home
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

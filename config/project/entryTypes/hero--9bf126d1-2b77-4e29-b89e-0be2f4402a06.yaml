@@ -1,0 +1,74 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  cc146579-b1ff-4808-ac7f-e3c79a58d653:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-06-13T05:28:03+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5e0b6541-53f0-47ee-9b91-9d36229cf8c5 # Eyebrow
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b908554c-4797-4857-8d8e-d1ed1ec6a7e8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:28:03+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 93052a8c-5fe1-487f-a1c5-23d838fe6a6e # Heading
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 30281438-c5d4-411b-b0d7-ecc0863c9636
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:28:03+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 009e1862-eac4-42dd-8bdd-12762c6577ab # Text
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d5c2400e-842c-46a3-8135-dc3d284c7db3
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: b0c73d04-5602-4737-8f51-7e4ba9b15b6c
+        userCondition: null
+    thumbFieldKey: null
+handle: hero
+hasTitleField: false
+icon: null
+name: Hero
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

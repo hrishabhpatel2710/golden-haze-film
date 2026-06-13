@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: iconCards
+instructions: null
+name: 'Icon Cards'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - 7e6c1825-42f6-4e15-9787-befc9b8a636c # Icon Card
+        -
+          - group
+          - General
+  includeTableView: false
+  maxEntries: 1
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

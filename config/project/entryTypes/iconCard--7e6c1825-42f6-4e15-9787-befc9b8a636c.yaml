@@ -1,0 +1,90 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  2dccff5c-e011-43fc-b52c-744a14098f39:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-06-13T05:33:28+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5e0b6541-53f0-47ee-9b91-9d36229cf8c5 # Eyebrow
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c796b9ac-7dd6-450a-b19e-984026beacb2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:33:28+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 93052a8c-5fe1-487f-a1c5-23d838fe6a6e # Heading
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0f4071e9-4eb2-45d8-88fd-1d230f72c18a
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:33:28+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 009e1862-eac4-42dd-8bdd-12762c6577ab # Text
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d967432f-97dc-45dc-b123-565746a3cad6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:33:28+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 40a506f4-3f0d-45d4-8a54-85370a1f8a23 # Icon Card
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cc84eee6-cd34-4291-ae43-5e96dae79e85
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: b7d2b047-a055-4830-b199-f91bebd3fb1a
+        userCondition: null
+    thumbFieldKey: null
+handle: iconCard
+hasTitleField: false
+icon: null
+name: 'Icon Card'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

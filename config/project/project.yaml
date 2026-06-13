@@ -1,0 +1,108 @@
+dateModified: 1781350215
+email:
+  fromEmail: $SYSTEM_EMAIL_FROM
+  fromName: 'Golden Haze Films'
+  replyToEmail: null
+  template: null
+  transportSettings:
+    host: smtp.gmail.com
+    password: $SMTP_PASSWORD
+    port: '587'
+    useAuthentication: '1'
+    username: $SMTP_USERNAME
+  transportType: craft\mail\transportadapters\Smtp
+fs:
+  images:
+    hasUrls: true
+    name: Images
+    settings:
+      path: '@webroot/uploads/images'
+    type: craft\fs\Local
+    url: '@web/uploads/images'
+  transforms:
+    hasUrls: true
+    name: Transforms
+    settings:
+      path: '@webroot/uploads/transforms'
+    type: craft\fs\Local
+    url: '@web/uploads/transforms'
+  videos:
+    hasUrls: true
+    name: Videos
+    settings:
+      path: '@webroot/uploads/videos'
+    type: craft\fs\Local
+    url: '@web/uploads/videos'
+meta:
+  __names__:
+    0af26047-dabf-4535-a647-f541fd575d6f: 'Home Page' # Home Page
+    0fd779eb-f827-4c47-93ea-5c4bc4cd298b: Icon # Icon
+    1de73ada-3835-4a07-a191-4d57dc55728c: Packeges # Packeges
+    2afe9d05-6c12-483a-86c9-15e9108b3b34: 'Package Type' # Package Type
+    2c458af4-3404-4947-b9ea-1ea1dfcc9d62: 'Number Cards' # Number Cards
+    2cc3a0be-f795-4253-bbfd-5b83cca9e193: 'First Name' # First Name
+    4b537a4c-c1e6-4a03-ba1d-4b998674d552: Projects # Projects
+    5e0b6541-53f0-47ee-9b91-9d36229cf8c5: Eyebrow # Eyebrow
+    6e103d22-79eb-4df8-ab84-3faf315eeeab: 'Golden Haze' # Golden Haze
+    6f3e33fa-42ca-4eb3-9f4c-80e83062e3ab: 'Icon Cards' # Icon Cards
+    6f563c65-6c14-4e52-8703-ac2c82797686: Images # Images
+    7c20adef-2472-4b72-8612-25af446923d3: Summary # Summary
+    7e6c1825-42f6-4e15-9787-befc9b8a636c: 'Icon Card' # Icon Card
+    8a356a46-b3f7-4cb8-a349-7e4387f9186b: 'Email Address' # Email Address
+    8f431adb-121f-4e75-b7d2-5401de16acac: Images # Images
+    8fb3c697-a080-419f-99cf-203ca6bf5d3a: Packages # Packages
+    9bf126d1-2b77-4e29-b89e-0be2f4402a06: Hero # Hero
+    009e1862-eac4-42dd-8bdd-12762c6577ab: Text # Text
+    18a736d8-1c62-4086-8128-f50a20e18e08: Quate # Quate
+    40a506f4-3f0d-45d4-8a54-85370a1f8a23: 'Icon Card' # Icon Card
+    51b35993-0480-4808-8de8-37ea7db7f487: Project # Project
+    66b34eef-279d-4db8-a87b-cbe25e7187ff: Hero # Hero
+    95c9c341-ae02-4982-88fe-7bcd6eeed103: Home # Home
+    96c9c301-b01e-4b80-a1eb-e699cccf6fdb: 'Phone Number' # Phone Number
+    272fd44b-678f-44d3-b82a-eb9dee226184: 'Service Interested In' # Service Interested In
+    291cc494-8a8a-46ad-b272-10612aa65c0d: Submission # Submission
+    360bf2e5-d238-4cdb-bb8b-c78c38406a63: Cards # Cards
+    415d3d4a-c2b8-4cdc-b6ce-ad3f9492b7d0: testimonials # testimonials
+    481a4b0f-bb6a-4dcb-aa84-b12edbdfc0c8: 'Project Page' # Project Page
+    664a5c4f-5908-4cb5-a3ce-e7d7cda0537f: Projects # Projects
+    707b1b0d-7760-4659-bf18-7586a9da26a9: 'Last Name' # Last Name
+    0805b77b-051e-4fd2-bc90-1fb72e58bba3: Testimonials # Testimonials
+    7596e94a-2475-42ee-9703-689983d5b3b7: Packages # Packages
+    7937b4b2-4f01-4602-8b41-251ae8d82be2: 'Image Content' # Image Content
+    048904fd-5846-4c38-a825-8f3684823f63: 'Golden Haze' # Golden Haze
+    69119c15-2e6d-4f3e-a83a-c4af23117279: 'Your Message' # Your Message
+    075806bb-6468-40a0-9ab2-5a8b30d5480d: 'Related Testimonials' # Related Testimonials
+    93052a8c-5fe1-487f-a1c5-23d838fe6a6e: Heading # Heading
+    165720c4-dac9-4ced-b7a8-444ef6b20a11: Submissions # Submissions
+    84072257-89e7-4ee1-83dc-176ee501bf67: 'Related Packages' # Related Packages
+    b0413aad-15c1-4e8d-82d7-2821b32614e9: 'Relate Projects' # Relate Projects
+    b38eebaa-5248-4ca6-8753-a8b2c12ad71e: Packeges # Packeges
+    bb2fa58d-3786-4b72-a90b-d05d0759f335: Image # Image
+    c3308abc-8c04-45e6-b4d1-2f92e40313d2: Videos # Videos
+    c5834d79-fc06-4f27-bf8f-c3ccc07d8a2a: Features # Features
+    c6165a79-c3fe-404c-b696-b106ebef7b69: Videos # Videos
+    c436177a-21e3-41c7-b42a-9fc6e849feb9: 'Project type' # Project type
+    ca143a5c-1087-4311-b01b-f34da03c1118: Caption # Caption
+    ccd304fe-59f4-477d-86ab-2fa9852e6ed5: 'Short Description' # Short Description
+    d97bab52-674a-47d5-a88e-2ac352aae87b: 'Client Name' # Client Name
+    d14877ea-83bf-4965-ae14-02a722d11113: 'Image Content' # Image Content
+    dce25792-f869-4246-9efd-fa699054d5dd: 'Project page' # Project page
+    e45ef604-b395-44c0-b5e0-8dbf2dd991d2: 'Package Price' # Package Price
+    e99bef72-132a-42e5-9ad0-023cc523ad78: 'Number Card' # Number Card
+    f6c979c8-c931-4a01-a918-607e318a1d6c: Projects # Projects
+    f25d091a-3dde-4356-b177-5bf10ef0dc78: Number # Number
+    f47be922-689a-406a-a8e6-05a20410c5e6: Testimonial # Testimonial
+    fe9246e6-e3bf-4ea8-a95f-6b7739f596ed: Testimonials # Testimonials
+system:
+  edition: solo
+  live: true
+  name: 'Golden Haze'
+  schemaVersion: 5.10.0.0
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true

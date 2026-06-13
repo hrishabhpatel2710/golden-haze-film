@@ -1,0 +1,22 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: dce25792-f869-4246-9efd-fa699054d5dd # Project page
+handle: projectPage
+maxAuthors: 1
+minAuthors: 1
+name: 'Project Page'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  6e103d22-79eb-4df8-ab84-3faf315eeeab: # Golden Haze
+    enabledByDefault: true
+    hasUrls: true
+    template: project-page/_entry.twig
+    uriFormat: project-page
+type: single

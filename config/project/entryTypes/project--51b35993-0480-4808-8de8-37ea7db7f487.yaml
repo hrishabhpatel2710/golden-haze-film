@@ -1,0 +1,90 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  ea0b6ee1-d1d3-4a98-a86d-f0db3fb539b2:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-06-13T05:43:57+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5e0b6541-53f0-47ee-9b91-9d36229cf8c5 # Eyebrow
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6e637c82-d2f8-44e9-aa1e-4212e15f34e1
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:43:57+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 93052a8c-5fe1-487f-a1c5-23d838fe6a6e # Heading
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2e2914bf-502a-4800-93ab-fe8c2bf9f308
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:43:57+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 009e1862-eac4-42dd-8bdd-12762c6577ab # Text
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 04b8cdfe-cf37-48e3-a808-ddcfd070ffa9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:43:57+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: b0413aad-15c1-4e8d-82d7-2821b32614e9 # Relate Projects
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c4254494-3cd6-4244-b4ea-b95547a12f6c
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 8c24f8e8-ceb9-490f-ba89-29e7b847a498
+        userCondition: null
+    thumbFieldKey: null
+handle: project
+hasTitleField: false
+icon: null
+name: Project
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

@@ -1,0 +1,22 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: f47be922-689a-406a-a8e6-05a20410c5e6 # Testimonial
+handle: testimonials
+maxAuthors: 1
+minAuthors: 1
+name: Testimonials
+previewTargets:
+  -
+    label: 'Primary entry page'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  6e103d22-79eb-4df8-ab84-3faf315eeeab: # Golden Haze
+    enabledByDefault: true
+    hasUrls: true
+    template: testimonials/_entry.twig
+    uriFormat: 'testimonials/{slug}'
+type: channel

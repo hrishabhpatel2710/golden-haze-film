@@ -1,0 +1,128 @@
+{#
+  Wraps text between double underscores in <em> for gold accent styling.
+  Example: Crafting __Cinematic__ → Crafting <em>Cinematic</em>
+#}
+{% macro replaceUnderscore(text) %}
+  {%- set parts = text|split('__') -%}
+  {%- for part in parts -%}
+    {%- if loop.index is odd -%}
+      {{- part -}}
+    {%- else -%}
+      <em>{{ part }}</em>
+    {%- endif -%}
+  {%- endfor -%}
+{% endmacro %}
+
+{#
+  Renders hero heading lines with slide-up animation.
+  Use | to force line breaks, otherwise splits into 3 balanced word groups.
+#}
+{% macro heroHeadingLines(heading) %}
+  {% import _self as macros %}
+  {% set lines = heading|split('|') %}
+  {% if lines|length == 1 %}
+    {% set words = heading|split(' ') %}
+    {% set chunkSize = (words|length / 3)|round(0, 'ceil') %}
+    {% set lines = [] %}
+    {% for i in 0..2 %}
+      {% set lineWords = words|slice(i * chunkSize, chunkSize) %}
+      {% if lineWords|length %}
+        {% set lines = lines|merge([lineWords|join(' ')]) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% for line in lines %}
+    <span class="line"><span class="line-inner">{{ macros.replaceUnderscore(line|trim)|raw }}</span></span>
+  {% endfor %}
+{% endmacro %}
+
+{#
+  Renders a heading with optional | line breaks and __gold__ underscores.
+#}
+{% macro headingWithBreaks(heading) %}
+  {% import _self as macros %}
+  {% set lines = heading|split('|') %}
+  {%- for line in lines -%}
+    {%- if not loop.first -%}<br>{%- endif -%}
+    {{- macros.replaceUnderscore(line|trim)|raw -}}
+  {%- endfor -%}
+{% endmacro %}
+
+{#
+  Splits multiline text into paragraph tags.
+#}
+{% macro textParagraphs(text, className, revealClass) %}
+  {% set paragraphs = text|split('\n\n') %}
+  {% if paragraphs|length == 1 and text|split('\n')|length > 1 %}
+    {% set paragraphs = text|split('\n') %}
+  {% endif %}
+  {% for paragraph in paragraphs %}
+    {% if paragraph|trim %}
+      <p class="{{ className }} {{ revealClass }}">{{ paragraph|trim }}</p>
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{#
+  Renders a Craft CMS Icon field SVG for the front end.
+#}
+{% macro craftIcon(iconData, className) %}
+  {% if iconData %}
+    <span class="{{ className }}">{{ svg('@appicons/' ~ iconData.name ~ '.svg', namespace=true) }}</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+  Formats a number using Indian grouping (e.g. 140000 → 1,40,000).
+#}
+{% macro indianNumber(num) %}
+  {%- set str = (num ?? 0)|round(0)|number_format(0, '.', '') -%}
+  {%- if str|length <= 3 -%}
+    {{- str -}}
+  {%- else -%}
+    {%- set result = str|slice(-3) -%}
+    {%- set remaining = str|slice(0, -3) -%}
+    {%- for i in 0..10 -%}
+      {%- if remaining|length > 0 -%}
+        {%- if remaining|length <= 2 -%}
+          {%- set result = remaining ~ ',' ~ result -%}
+          {%- set remaining = '' -%}
+        {%- else -%}
+          {%- set result = remaining|slice(-2) ~ ',' ~ result -%}
+          {%- set remaining = remaining|slice(0, -2) -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {{- result -}}
+  {%- endif -%}
+{% endmacro %}
+
+{#
+  Maps package type to display emoji.
+#}
+{% macro packageTypeIcon(packageType) %}
+  {%- set icons = {
+    'silver': '🥈',
+    'gold': '✨',
+    'platinum': '💎',
+  } -%}
+  {{- icons[packageType|lower|trim]|default('✦') -}}
+{% endmacro %}
+
+{#
+  Contact link icons
+#}
+{% macro instagramIcon() %}
+  <svg class="contact-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>
+  </svg>
+{% endmacro %}
+
+{% macro whatsappIcon() %}
+  <svg class="contact-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.94 14.54L2 22l5.62-1.47A10 10 0 1 0 12 2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M8.2 9.1c.2 1.2 1.4 3.1 3.5 4.1 1.4.7 2.5.9 3.1 1 .6.1 1.1-.1 1.5-.5l.9-.9c.2-.2.5-.3.8-.2 1 .3 1.9.5 2.4.5.3 0 .6.3.6.6 0 1-.8 2-2 2-.2 0-.5 0-.8-.1-2.4-.6-4.3-2.5-4.9-4.9-.1-.3-.1-.6-.1-.8 0-1.2 1-2 2-2 .2 0 .5 0 .8.1" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+{% endmacro %}

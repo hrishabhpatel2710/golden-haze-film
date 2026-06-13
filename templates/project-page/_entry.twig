@@ -1,0 +1,163 @@
+{% extends '_layouts/main.twig' %}
+{% import '_macros.twig' as macros %}
+
+{% block title %}{{ entry.title }} — Golden Haze Films{% endblock %}
+{% block metaDescription %}Explore our portfolio of cinematic wedding films, branding, and commercial projects by Golden Haze Films.{% endblock %}
+
+{% block content %}
+{% set allProjects = craft.entries()
+  .section('projects')
+  .orderBy('postDate desc')
+  .all()
+%}
+<section id="project-list-page">
+  <div class="project-list-hero">
+    {% if entry.eyebrow %}
+      <div class="section-label section-label--center reveal">{{ entry.eyebrow }}</div>
+    {% endif %}
+    <h1 class="projects-h2 reveal reveal-delay-1">
+      {% if entry.heading %}
+        {{ macros.headingWithBreaks(entry.heading)|raw }}
+      {% else %}
+        {{ entry.title }}
+      {% endif %}
+    </h1>
+    {% if entry.text %}
+      <p class="project-list-sub reveal reveal-delay-2">{{ entry.text }}</p>
+    {% endif %}
+  </div>
+
+  {% if allProjects|length %}
+    <div class="projects-grid projects-grid--listing" id="projectsGrid">
+      {% for project in allProjects %}
+        {% set projectImage = project.images.one() %}
+        <a
+          href="{{ project.url }}"
+          class="project-card project-list-card{{ loop.index > 20 ? ' is-lazy-hidden' : '' }} reveal{{ loop.index0 % 4 == 0 ? '' : ' reveal-delay-' ~ (loop.index0 % 4) }}"
+        >
+          <div class="project-bg"{% if projectImage %} style="background-image: url('{{ projectImage.getUrl({ width: 900, mode: 'crop', quality: 90 }) }}')"{% endif %}></div>
+          <div class="project-content">
+            <span class="project-cat">{{ project.projectType }}</span>
+            <h2 class="project-title">{{ project.title }}</h2>
+            <p class="project-desc">{{ project.summary }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {% if allProjects|length > 20 %}
+      <div class="project-list-load-more reveal">
+        <button type="button" class="btn-outline" id="loadMoreProjects" data-batch="20">
+          Load More Projects
+        </button>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="project-list-empty reveal">
+      <p>No projects have been published yet. Check back soon.</p>
+    </div>
+  {% endif %}
+</section>
+
+<!-- =============================================
+     CONTACT CTA + FORM
+     ============================================= -->
+<section id="contact-cta">
+  <div class="contact-cta-inner">
+    <div class="cta-left">
+      <div class="section-label reveal">Get In Touch</div>
+      <h2 class="cta-h2 reveal reveal-delay-1">
+        Let's Create<br>
+        <em>Something<br>Extraordinary</em>
+      </h2>
+      <p class="cta-sub reveal reveal-delay-2">Every great story begins with a conversation. Reach out to our team and let us understand your vision — we will bring it to life with Golden craftsmanship.</p>
+
+      <div class="contact-links reveal reveal-delay-3">
+        <a href="tel:+918349820587" class="contact-link">
+          <div class="contact-link-icon">📞</div>
+          <span>+91 8349820587</span>
+        </a>
+        <a href="mailto:filmsgoldenhaze@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          <span>filmsgoldenhaze@gmail.com</span>
+        </a>
+        <a href="https://instagram.com/goldenhazefilms" class="contact-link">
+          <div class="contact-link-icon">{{ macros.instagramIcon() }}</div>
+          <span>@goldenhazefilms</span>
+        </a>
+        <a href="https://wa.me/918349820587" class="contact-link">
+          <div class="contact-link-icon">{{ macros.whatsappIcon() }}</div>
+          <span>WhatsApp Us</span>
+        </a>
+        <div class="contact-link">
+          <div class="contact-link-icon">📍</div>
+          <span>Jabalpur, Madhya Pradesh, India</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap reveal reveal-delay-2">
+      <form class="contact-form" id="contact-form" method="post" accept-charset="UTF-8">
+        {{ csrfInput() }}
+        {{ actionInput('contactform/submit/send') }}
+        {{ redirectInput(craft.app.request.url|split('#')|first ~ '#contact-cta') }}
+
+        {% if craft.app.session.hasFlash('contactSuccess') %}
+          <div class="form-notice form-notice--success">✦ Message sent — we'll be in touch soon.</div>
+        {% endif %}
+        {% if craft.app.session.hasFlash('contactError') %}
+          <div class="form-notice form-notice--error">{{ craft.app.session.getFlash('contactError') }}</div>
+        {% endif %}
+
+        <h3 class="form-title">Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Aarav" required value="{{ craft.app.request.getBodyParam('firstName') }}">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Sharma" required value="{{ craft.app.request.getBodyParam('lastName') }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+91 98765 43210" required value="{{ craft.app.request.getBodyParam('phoneNumber') }}">
+          </div>
+          <div class="form-group">
+            <label for="emailAddress">Email Address</label>
+            <input type="email" id="emailAddress" name="emailAddress" placeholder="hello@example.com" required value="{{ craft.app.request.getBodyParam('emailAddress') }}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="serviceInterestedIn">Service Interested In</label>
+          <select id="serviceInterestedIn" name="serviceInterestedIn">
+            <option value="">Select a Service</option>
+            {% set selectedService = craft.app.request.getBodyParam('serviceInterestedIn') %}
+            <option value="Wedding Videography"{{ selectedService == 'Wedding Videography' ? ' selected' : '' }}>Wedding Videography</option>
+            <option value="Wedding Photography"{{ selectedService == 'Wedding Photography' ? ' selected' : '' }}>Wedding Photography</option>
+            <option value="Pre-Wedding Shoot"{{ selectedService == 'Pre-Wedding Shoot' ? ' selected' : '' }}>Pre-Wedding Shoot</option>
+            <option value="Video Editing"{{ selectedService == 'Video Editing' ? ' selected' : '' }}>Video Editing</option>
+            <option value="Album Designing"{{ selectedService == 'Album Designing' ? ' selected' : '' }}>Album Designing</option>
+            <option value="Brand Development"{{ selectedService == 'Brand Development' ? ' selected' : '' }}>Brand Development</option>
+            <option value="Graphic Design"{{ selectedService == 'Graphic Design' ? ' selected' : '' }}>Graphic Design</option>
+            <option value="Web Development"{{ selectedService == 'Web Development' ? ' selected' : '' }}>Web Development</option>
+            <option value="Commercial Shoot"{{ selectedService == 'Commercial Shoot' ? ' selected' : '' }}>Commercial Shoot</option>
+            <option value="Social Media Content"{{ selectedService == 'Social Media Content' ? ' selected' : '' }}>Social Media Content</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="yourMessage">Your Message</label>
+          <textarea id="yourMessage" name="yourMessage" placeholder="Tell us about your vision, event date, or any specific requirements…">{{ craft.app.request.getBodyParam('yourMessage') }}</textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/project-list.js"></script>
+{% endblock %}

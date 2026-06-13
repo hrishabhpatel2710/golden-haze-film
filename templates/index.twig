@@ -1,0 +1,733 @@
+{% extends '_layouts/main.twig' %}
+{% import '_macros.twig' as macros %}
+
+{% set entry = entry ?? homePage ?? craft.entries().section('homePage').one() %}
+
+{% block content %}
+{% set heroBlock = entry is defined ? entry.hero.one() : null %}
+<!-- =============================================
+     HERO
+     ============================================= -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+  <canvas id="particles"></canvas>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">{{ heroBlock ? heroBlock.eyebrow|default('Jabalpur · Madhya Pradesh · India') : 'Jabalpur · Madhya Pradesh · India' }}</div>
+    <h1 class="hero-h1">
+      {% if heroBlock and heroBlock.heading %}
+        {{ macros.heroHeadingLines(heroBlock.heading) }}
+      {% else %}
+        <span class="line"><span class="line-inner">Crafting <em>Cinematic</em></span></span>
+        <span class="line"><span class="line-inner">Memories That</span></span>
+        <span class="line"><span class="line-inner">Last <em>Forever</em></span></span>
+      {% endif %}
+    </h1>
+    <p class="hero-sub">{{ heroBlock ? heroBlock.text|default('Luxury Wedding Films &amp; Creative Digital Experiences') : 'Luxury Wedding Films &amp; Creative Digital Experiences' }}</p>
+    <div class="hero-actions">
+      <a href="/projects" class="btn-gold"><span>View Projects</span></a>
+      <a href="#contact-cta" class="btn-outline">Book Consultation</a>
+    </div>
+  </div>
+
+  {# <div class="hero-scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div> #}
+</section>
+
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span>Wedding Videography</span><span class="dot">✦</span>
+    <span>Cinematic Films</span><span class="dot">✦</span>
+    <span>Pre-Wedding Shoots</span><span class="dot">✦</span>
+    <span>Album Designing</span><span class="dot">✦</span>
+    <span>Brand Development</span><span class="dot">✦</span>
+    <span>Web Development</span><span class="dot">✦</span>
+    <span>Commercial Shoots</span><span class="dot">✦</span>
+    <span>Graphic Design</span><span class="dot">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Wedding Videography</span><span class="dot">✦</span>
+    <span>Cinematic Films</span><span class="dot">✦</span>
+    <span>Pre-Wedding Shoots</span><span class="dot">✦</span>
+    <span>Album Designing</span><span class="dot">✦</span>
+    <span>Brand Development</span><span class="dot">✦</span>
+    <span>Web Development</span><span class="dot">✦</span>
+    <span>Commercial Shoots</span><span class="dot">✦</span>
+    <span>Graphic Design</span><span class="dot">✦</span>
+  </div>
+</div>
+
+
+<!-- =============================================
+     ABOUT
+     ============================================= -->
+{% set aboutBlock = entry is defined ? entry.imageContent.one() : null %}
+{% set aboutImage = aboutBlock ? aboutBlock.image.one() : null %}
+<section id="about">
+  <div class="about-left reveal">
+    <div class="about-img-stack">
+      <div class="about-img-main">
+        {% if aboutImage %}
+          {% set aboutImgTransform = { width: 1400, mode: 'crop', quality: 100 } %}
+          <img
+            src="{{ aboutImage.getUrl(aboutImgTransform) }}"
+            srcset="{{ aboutImage.getUrl(aboutImgTransform) }} 1x, {{ aboutImage.getUrl(aboutImgTransform|merge({ width: 2800 })) }} 2x"
+            alt="{{ aboutImage.title }}"
+            loading="lazy"
+          >
+        {% else %}
+          <div class="about-img-placeholder">golden<br>haze</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="section-label reveal">{{ aboutBlock ? aboutBlock.eyebrow|default('Our Story') : 'Our Story' }}</div>
+    <h2 class="about-h2 reveal reveal-delay-1">
+      {% if aboutBlock and aboutBlock.heading %}
+        {{ macros.headingWithBreaks(aboutBlock.heading)|raw }}
+      {% else %}
+        We Don't Just Film —<br>
+        We <em>Tell Your Story</em><br>
+        in Gold.
+      {% endif %}
+    </h2>
+    {% if aboutBlock and aboutBlock.text %}
+      {{ macros.textParagraphs(aboutBlock.text, 'about-body', 'reveal reveal-delay-2') }}
+    {% else %}
+      <p class="about-body reveal reveal-delay-2">
+        Golden Haze Films is Jabalpur's most distinguished creative studio — a place where artistry meets emotion, and where every frame is crafted with intention. Born from a deep love for visual storytelling, we have been transforming precious moments into cinematic gold since our inception.
+      </p>
+      <p class="about-body reveal reveal-delay-2">
+        From the intricate choreography of wedding ceremonies to the grandeur of commercial productions, our multidisciplinary team brings a rare blend of technical mastery and poetic vision to every project.
+      </p>
+    {% endif %}
+    {% if aboutBlock and aboutBlock.quate %}
+      <div class="about-quote reveal reveal-delay-3">
+        <p>{{ aboutBlock.quate }}</p>
+      </div>
+    {% else %}
+      <div class="about-quote reveal reveal-delay-3">
+        <p>"Every love story deserves to be told with the same grace, depth and beauty it carries in real life."</p>
+      </div>
+    {% endif %}
+    <div class="about-stats-row reveal reveal-delay-4">
+      {% if aboutBlock and aboutBlock.numberCards|length %}
+        {% for card in aboutBlock.numberCards.all() %}
+          <div class="about-stat">
+            <div class="num">{{ card.number }}</div>
+            <div class="lbl">{{ card.text }}</div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="about-stat">
+          <div class="num">8+</div>
+          <div class="lbl">Years of Excellence</div>
+        </div>
+        <div class="about-stat">
+          <div class="num">500+</div>
+          <div class="lbl">Happy Families</div>
+        </div>
+        <div class="about-stat">
+          <div class="num">12</div>
+          <div class="lbl">Services Offered</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     SERVICES
+     ============================================= -->
+{% set servicesBlock = entry is defined ? entry.iconCards.one() : null %}
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label reveal">{{ servicesBlock ? servicesBlock.eyebrow|default('What We Do') : 'What We Do' }}</div>
+      <h2 class="services-h2 reveal reveal-delay-1">
+        {% if servicesBlock and servicesBlock.heading %}
+          {{ macros.headingWithBreaks(servicesBlock.heading)|raw }}
+        {% else %}
+          Creative Services<br>
+          <em>Built for Excellence</em>
+        {% endif %}
+      </h2>
+    </div>
+    <p class="services-sub reveal">{{ servicesBlock ? servicesBlock.text|default('A full-spectrum creative studio offering everything from cinematic wedding films to digital brand identities.') : 'A full-spectrum creative studio offering everything from cinematic wedding films to digital brand identities.' }}</p>
+  </div>
+  <div class="services-grid">
+    {% if servicesBlock and servicesBlock.iconCard|length %}
+      {% for card in servicesBlock.iconCard.all() %}
+        {% set delay = loop.index0 % 4 %}
+        <div class="service-card {{ delay == 0 ? 'reveal' : 'reveal reveal-delay-' ~ delay }}">
+          <span class="service-num">{{ '%02d'|format(loop.index) }}</span>
+          {{ macros.craftIcon(card.icons, 'service-icon')|raw }}
+          <h3 class="service-title">{{ card.heading }}</h3>
+          <p class="service-desc">{{ card.text }}</p>          
+        </div>
+      {% endfor %}
+    {% else %}
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="4" y="10" width="40" height="28" rx="2"/>
+        <path d="M18 18l12 6-12 6V18z" fill="currentColor" stroke="none" opacity="0.6"/>
+        <circle cx="8" cy="14" r="1.5" fill="currentColor"/>
+        <circle cx="8" cy="34" r="1.5" fill="currentColor"/>
+        <circle cx="40" cy="14" r="1.5" fill="currentColor"/>
+        <circle cx="40" cy="34" r="1.5" fill="currentColor"/>
+      </svg>
+      <h3 class="service-title">Wedding Films</h3>
+      <p class="service-desc">Cinematic masterpieces that capture the emotion, elegance and timeless beauty of your wedding day.</p>      
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">02</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="6" y="8" width="36" height="28" rx="2"/>
+        <circle cx="24" cy="22" r="7"/>
+        <path d="M18 8l3-4h6l3 4"/>
+        <circle cx="36" cy="15" r="2" fill="currentColor" opacity="0.5"/>
+      </svg>
+      <h3 class="service-title">Photography</h3>
+      <p class="service-desc">Timeless imagery with a refined editorial perspective — from intimate ceremonies to grand celebrations.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">03</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="4" y="14" width="40" height="20" rx="1"/>
+        <path d="M4 20h40M12 14v20M36 14v20"/>
+        <path d="M16 24h4M28 24h4" stroke-width="2"/>
+      </svg>
+      <h3 class="service-title">Video Editing</h3>
+      <p class="service-desc">Expert colour grading, sound design and narrative editing that transform raw footage into cinematic art.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-num">04</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="8" y="6" width="32" height="36" rx="2"/>
+        <path d="M14 14h20M14 20h20M14 26h12"/>
+        <rect x="14" y="32" width="8" height="6" rx="1"/>
+      </svg>
+      <h3 class="service-title">Album Designing</h3>
+      <p class="service-desc">Heirloom-quality photo albums and photobooks crafted to preserve your memories with luxurious artistry.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <span class="service-num">05</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="24" cy="24" r="16"/>
+        <path d="M24 8v4M24 36v4M8 24h4M36 24h4"/>
+        <path d="M17 17l2.8 2.8M28.2 28.2L31 31M17 31l2.8-2.8M28.2 19.8L31 17"/>
+        <circle cx="24" cy="24" r="5" fill="currentColor" opacity="0.3"/>
+      </svg>
+      <h3 class="service-title">Branding</h3>
+      <p class="service-desc">Strategic brand identities built on deep narrative — visual systems that speak, inspire and endure.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">06</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="6" y="10" width="24" height="18" rx="1"/>
+        <rect x="18" y="22" width="24" height="18" rx="1"/>
+        <path d="M6 20h24M18 28h24"/>
+      </svg>
+      <h3 class="service-title">Graphic Design</h3>
+      <p class="service-desc">Sophisticated print and digital design — from posters to packaging, each piece is a visual statement.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">07</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="6" y="8" width="36" height="26" rx="2"/>
+        <path d="M6 14h36"/>
+        <path d="M12 8v6M16 8v6M20 8v6"/>
+        <path d="M16 34l4 6h8l4-6"/>
+        <path d="M18 22l4 4 8-8"/>
+      </svg>
+      <h3 class="service-title">Web Development</h3>
+      <p class="service-desc">Premium digital experiences — custom websites and applications engineered for performance and beauty.</p>
+      <div class="service-arrow">Explore →</div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-num">08</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="8" y="8" width="32" height="22" rx="2"/>
+        <path d="M8 18h32"/>
+        <circle cx="14" cy="13" r="2"/>
+        <circle cx="20" cy="13" r="2"/>
+        <path d="M16 34l-6 6h28l-6-6"/>
+        <path d="M24 30v4"/>
+      </svg>
+      <h3 class="service-title">Commercial Shoots</h3>
+      <p class="service-desc">High-production-value brand content and commercial photography that elevates your market presence.</p>
+      <div class="service-arrow">Explore →</div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- =============================================
+     PACKAGES
+     ============================================= -->
+{% set packagesBlock = entry is defined ? entry.packeges.one() : null %}
+<section id="packages">
+  <div class="packages-header">
+    <div class="section-label reveal" style="justify-content:center">{{ packagesBlock ? packagesBlock.eyebrow|default('Wedding Packages') : 'Wedding Packages' }}</div>
+    <h2 class="packages-h2 reveal reveal-delay-1">
+      {% if packagesBlock and packagesBlock.heading %}
+        {{ macros.headingWithBreaks(packagesBlock.heading)|raw }}
+      {% else %}
+        Choose Your <em>Golden</em> Experience
+      {% endif %}
+    </h2>
+    <p class="packages-sub reveal reveal-delay-2">{{ packagesBlock ? packagesBlock.text|default('Curated packages designed to honour every detail of your celebration.') : 'Curated packages designed to honour every detail of your celebration.' }}</p>
+  </div>
+  <div class="packages-grid">
+    {% if packagesBlock and packagesBlock.relatedPackages|length %}
+      {% for package in packagesBlock.relatedPackages.all() %}
+        {% set isFeatured = package.packageType|lower|trim == 'gold' %}
+        {% set delay = loop.index0 % 3 %}
+        <div class="pkg-card{{ isFeatured ? ' featured' : '' }} {{ delay == 0 ? 'reveal' : 'reveal reveal-delay-' ~ delay }}">
+          {% if isFeatured %}
+            <div class="pkg-badge">Most Popular</div>
+          {% endif %}
+          <div class="pkg-icon">{{ macros.packageTypeIcon(package.packageType) }}</div>
+          <div class="pkg-tier">{{ package.packageType|title }}</div>
+          <div class="pkg-name">{{ package.title }}</div>
+          <div class="pkg-price"><span>₹</span>{{ macros.indianNumber(package.packagePrice) }}</div>
+          <div class="pkg-duration">{{ package.caption }}</div>
+          <div class="pkg-divider"></div>
+          {% if package.features|length %}
+            <ul class="pkg-features">
+              {% for row in package.features %}
+                {% if row.features|default %}
+                  <li>{{ row.features }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+          <a href="#contact-cta" class="pkg-cta">Book {{ package.title }}</a>
+        </div>
+      {% endfor %}
+    {% else %}
+    <div class="pkg-card reveal">
+      <div class="pkg-icon">🥈</div>
+      <div class="pkg-tier">Silver</div>
+      <div class="pkg-name">Essence</div>
+      <div class="pkg-price"><span>₹</span>45,000</div>
+      <div class="pkg-duration">1 Day Coverage</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Full-Day Videography Coverage</li>
+        <li>Cinematic Wedding Highlight Film (8–10 min)</li>
+        <li>Professional Photography (300+ edited photos)</li>
+        <li>2 Videographers + 1 Photographer</li>
+        <li>Basic Colour Grading</li>
+        <li>Digital Delivery in 30 Days</li>
+        <li>Raw footage included</li>
+      </ul>
+      <a href="#contact-cta" class="pkg-cta">Book Essence</a>
+    </div>
+
+    <!-- GOLD (FEATURED) -->
+    <div class="pkg-card featured reveal reveal-delay-1">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-icon">✨</div>
+      <div class="pkg-tier">Gold</div>
+      <div class="pkg-name">Aurea</div>
+      <div class="pkg-price"><span>₹</span>85,000</div>
+      <div class="pkg-duration">2 Days Coverage</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>2-Day Full Coverage (Pre-wedding + Wedding)</li>
+        <li>Cinematic Feature Film (15–20 min)</li>
+        <li>Pre-Wedding Shoot Included</li>
+        <li>3 Videographers + 2 Photographers</li>
+        <li>Premium Colour Grading + Sound Design</li>
+        <li>Drone Aerial Coverage</li>
+        <li>Hardbound Premium Photo Album (40 pages)</li>
+        <li>Same-Day Edit Highlights</li>
+        <li>Delivery in 21 Days</li>
+      </ul>
+      <a href="#contact-cta" class="pkg-cta">Book Aurea</a>
+    </div>
+
+    <!-- PLATINUM -->
+    <div class="pkg-card reveal reveal-delay-2">
+      <div class="pkg-icon">💎</div>
+      <div class="pkg-tier">Platinum</div>
+      <div class="pkg-name">Ricordi</div>
+      <div class="pkg-price"><span>₹</span>1,40,000</div>
+      <div class="pkg-duration">Full Wedding Journey</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Complete 3–5 Day Wedding Coverage</li>
+        <li>Feature Documentary Film (30–45 min)</li>
+        <li>Multiple Pre-Wedding Locations</li>
+        <li>5-Member Elite Creative Team</li>
+        <li>4K Cinematic Grade + Dolby Audio</li>
+        <li>Multi-Angle Drone + Gimbal Coverage</li>
+        <li>Luxury Album + Digital Box Set</li>
+        <li>Social Media Reels (5 curated clips)</li>
+        <li>Dedicated Creative Director</li>
+        <li>Priority Delivery in 14 Days</li>
+      </ul>
+      <a href="#contact-cta" class="pkg-cta">Book Ricordi</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- =============================================
+     FEATURED PROJECTS
+     ============================================= -->
+{% set projectsBlock = entry is defined ? entry.projects.one() : null %}
+<section id="projects-preview">
+  <div class="projects-header">
+    <div>
+      <div class="section-label reveal">{{ projectsBlock ? projectsBlock.eyebrow|default('Our Work') : 'Our Work' }}</div>
+      <h2 class="projects-h2 reveal reveal-delay-1">
+        {% if projectsBlock and projectsBlock.heading %}
+          {{ macros.headingWithBreaks(projectsBlock.heading)|raw }}
+        {% else %}
+          Featured <em>Projects</em>
+        {% endif %}
+      </h2>
+    </div>
+    <a href="/projects" class="btn-outline reveal reveal-delay-2" style="flex-shrink:0">View All Projects</a>
+  </div>
+  <div class="projects-grid">
+    {% if projectsBlock and projectsBlock.relatedProjects|length %}
+      {% for project in projectsBlock.relatedProjects.all() %}
+        {% set projectImage = project.images.one() %}
+        {% set delay = loop.index0 % 4 %}
+        <a href="{{ project.url }}" class="project-card {{ delay == 0 ? 'reveal' : 'reveal reveal-delay-' ~ delay }}">
+          <div class="project-bg"{% if projectImage %} style="background-image: url('{{ projectImage.getUrl({ width: 1200, mode: 'crop', quality: 90 }) }}')"{% endif %}></div>
+          {% if loop.index <= 2 %}
+            <div class="project-film-strip">
+              {% for i in 1..(loop.index == 1 ? 4 : 3) %}
+                <div class="film-hole"></div>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <div class="project-content">
+            <span class="project-cat">{{ project.projectType }}</span>
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-desc">{{ project.summary }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    {% else %}
+    <div class="project-card reveal">
+      <div class="project-bg"></div>
+      <div class="project-film-strip">
+        <div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div><div class="film-hole"></div>
+      </div>
+      <div class="project-content">
+        <span class="project-cat">Wedding Film</span>
+        <h3 class="project-title">Aryan &amp; Priya — A Golden Union</h3>
+        <p class="project-desc">An intimate celebration across two days in Jabalpur, woven with emotion, tradition and cinematic light.</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-bg"></div>
+      <div class="project-film-strip">
+        <div class="film-hole"></div><div class="film-hole"></div>
+        <div class="film-hole"></div>
+      </div>
+      <div class="project-content">
+        <span class="project-cat">Pre-Wedding</span>
+        <h3 class="project-title">Karan &amp; Isha — Autumn in the Hills</h3>
+        <p class="project-desc">A romantic pre-wedding film set against misty landscapes and warm golden light.</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-2">
+      <div class="project-bg"></div>
+      <div class="project-content">
+        <span class="project-cat">Branding</span>
+        <h3 class="project-title">Elara Jewels — Brand Identity</h3>
+        <p class="project-desc">A complete luxury brand identity built for a fine jewellery atelier in Bhopal.</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-3">
+      <div class="project-bg"></div>
+      <div class="project-content">
+        <span class="project-cat">Commercial</span>
+        <h3 class="project-title">Noor Couture — Campaign Film</h3>
+        <p class="project-desc">A cinematic fashion campaign blending editorial photography with motion storytelling.</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="projects-cta-wrap reveal">
+    <a href="/projects" class="btn-gold"><span>View All Projects</span></a>
+  </div>
+</section>
+
+
+<!-- =============================================
+     WHY CHOOSE US
+     ============================================= -->
+<section id="why">
+  <div class="why-inner">
+    <div class="why-left">
+      <div class="section-label reveal">Why Golden Haze</div>
+      <h2 class="why-h2 reveal reveal-delay-1">
+        Where Every<br>
+        Moment Becomes<br>
+        <em>Ricordi d'Oro</em>
+      </h2>
+      <p class="why-body reveal reveal-delay-2">
+        We believe that your memories deserve nothing less than perfection. With a dedicated creative team, state-of-the-art equipment, and an unwavering commitment to cinematic storytelling, Golden Haze Films stands apart as Central India's premier visual studio.
+      </p>
+      <div class="why-signature reveal reveal-delay-3">Golden Haze Films</div>
+    </div>
+    <div class="why-right">
+      <div class="why-pillars">
+        <div class="why-pillar reveal">
+          <div class="why-pillar-num">01</div>
+          <div class="why-pillar-body">
+            <div class="why-pillar-title">Cinematic Excellence</div>
+            <div class="why-pillar-desc">4K cinema-grade cameras, professional lighting, and drone coverage — every project is produced at the highest technical standard.</div>
+          </div>
+        </div>
+        <div class="why-pillar reveal reveal-delay-1">
+          <div class="why-pillar-num">02</div>
+          <div class="why-pillar-body">
+            <div class="why-pillar-title">Artistic Direction</div>
+            <div class="why-pillar-desc">Our team doesn't follow trends — we craft a unique visual narrative for each client, rooted in genuine storytelling.</div>
+          </div>
+        </div>
+        <div class="why-pillar reveal reveal-delay-2">
+          <div class="why-pillar-num">03</div>
+          <div class="why-pillar-body">
+            <div class="why-pillar-title">Premium Editing</div>
+            <div class="why-pillar-desc">International-grade colour grading, sound design and motion work that transforms footage into a film you will treasure forever.</div>
+          </div>
+        </div>
+        <div class="why-pillar reveal reveal-delay-3">
+          <div class="why-pillar-num">04</div>
+          <div class="why-pillar-body">
+            <div class="why-pillar-title">On-Time Delivery</div>
+            <div class="why-pillar-desc">Committed delivery timelines with proactive communication — because your anticipation matters to us as much as the final film.</div>
+          </div>
+        </div>
+        <div class="why-pillar reveal reveal-delay-4">
+          <div class="why-pillar-num">05</div>
+          <div class="why-pillar-body">
+            <div class="why-pillar-title">Full-Service Studio</div>
+            <div class="why-pillar-desc">From wedding films and photography to branding and web development — one creative home for all your visual needs.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     TESTIMONIALS
+     ============================================= -->
+{% set testimonialsBlock = entry is defined ? entry.testimonials.one() : null %}
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <div class="section-label reveal" style="justify-content:center">{{ testimonialsBlock ? testimonialsBlock.eyebrow|default('Client Stories') : 'Client Stories' }}</div>
+      <h2 class="testimonials-h2 reveal reveal-delay-1">
+        {% if testimonialsBlock and testimonialsBlock.heading %}
+          {{ macros.headingWithBreaks(testimonialsBlock.heading)|raw }}
+        {% else %}
+          Words of <em>Gold</em>
+        {% endif %}
+      </h2>
+    </div>
+
+    <div class="testimonials-slider reveal reveal-delay-2">
+      <div class="testimonials-track" id="tTrack">
+        {% if testimonialsBlock and testimonialsBlock.relatedTestimonials|length %}
+          {% for testimonial in testimonialsBlock.relatedTestimonials.all() %}
+            <div class="testimonial-slide">
+              <span class="testimonial-quote-mark">"</span>
+              <p class="testimonial-text">{{ testimonial.quate }}</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">{{ testimonial.clientName|slice(0, 1)|upper }}</div>
+                <div class="testimonial-info">
+                  <div class="testimonial-name">{{ testimonial.clientName }}</div>
+                  <div class="testimonial-role">{{ testimonial.shortDescription }}</div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+        <div class="testimonial-slide">
+          <span class="testimonial-quote-mark">"</span>
+          <p class="testimonial-text">Golden Haze Films didn't just film our wedding — they created a work of art. Every frame, every edit, every musical choice felt deeply intentional. When we watch our film, we relive every emotion as if it were yesterday.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">Aryan &amp; Priya Sharma</div>
+              <div class="testimonial-role">Wedding Film Client · Jabalpur</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <span class="testimonial-quote-mark">"</span>
+          <p class="testimonial-text">The branding they created for my jewellery label was beyond what I imagined. They understood the soul of my brand and translated it into a visual identity that speaks luxury. Truly a world-class team in Jabalpur.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">N</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">Nidhi Agarwal</div>
+              <div class="testimonial-role">Founder, Elara Jewels · Bhopal</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <span class="testimonial-quote-mark">"</span>
+          <p class="testimonial-text">From the pre-wedding shoot to the final film, every interaction with the Golden Haze team was exceptional. They have an extraordinary ability to capture emotion. Our wedding film has made our entire family cry — with joy.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">R</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">Rohan &amp; Simran Mehta</div>
+              <div class="testimonial-role">Wedding Film Client · Bhopal</div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="t-arrows">
+      <button class="t-arrow" id="tPrev" aria-label="Previous">←</button>
+      <button class="t-arrow" id="tNext" aria-label="Next">→</button>
+    </div>
+    <div class="testimonials-nav" id="tDots">
+      {% if testimonialsBlock and testimonialsBlock.relatedTestimonials|length %}
+        {% for testimonial in testimonialsBlock.relatedTestimonials.all() %}
+          <div class="t-dot{{ loop.first ? ' active' : '' }}"></div>
+        {% endfor %}
+      {% else %}
+        <div class="t-dot active"></div>
+        <div class="t-dot"></div>
+        <div class="t-dot"></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     CONTACT CTA + FORM
+     ============================================= -->
+<section id="contact-cta">
+  <div class="contact-cta-inner">
+    <div class="cta-left">
+      <div class="section-label reveal">Get In Touch</div>
+      <h2 class="cta-h2 reveal reveal-delay-1">
+        Let's Create<br>
+        <em>Something<br>Extraordinary</em>
+      </h2>
+      <p class="cta-sub reveal reveal-delay-2">Every great story begins with a conversation. Reach out to our team and let us understand your vision — we will bring it to life with Golden craftsmanship.</p>
+
+      <div class="contact-links reveal reveal-delay-3">
+        <a href="tel:+918349820587" class="contact-link">
+          <div class="contact-link-icon">📞</div>
+          <span>+91 8349820587</span>
+        </a>
+        <a href="mailto:filmsgoldenhaze@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          <span>filmsgoldenhaze@gmail.com</span>
+        </a>
+        <a href="https://instagram.com/goldenhazefilms" class="contact-link">
+          <div class="contact-link-icon">{{ macros.instagramIcon() }}</div>
+          <span>@goldenhazefilms</span>
+        </a>
+        <a href="https://wa.me/918349820587" class="contact-link">
+          <div class="contact-link-icon">{{ macros.whatsappIcon() }}</div>
+          <span>WhatsApp Us</span>
+        </a>
+        <div class="contact-link">
+          <div class="contact-link-icon">📍</div>
+          <span>Jabalpur, Madhya Pradesh, India</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap reveal reveal-delay-2">
+      <form class="contact-form" id="contact-form" method="post" accept-charset="UTF-8">
+        {{ csrfInput() }}
+        {{ actionInput('contactform/submit/send') }}
+        {{ redirectInput(craft.app.request.url|split('#')|first ~ '#contact-cta') }}
+
+        {% if craft.app.session.hasFlash('contactSuccess') %}
+          <div class="form-notice form-notice--success">✦ Message sent — we'll be in touch soon.</div>
+        {% endif %}
+        {% if craft.app.session.hasFlash('contactError') %}
+          <div class="form-notice form-notice--error">{{ craft.app.session.getFlash('contactError') }}</div>
+        {% endif %}
+
+        <h3 class="form-title">Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Aarav" required value="{{ craft.app.request.getBodyParam('firstName') }}">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Sharma" required value="{{ craft.app.request.getBodyParam('lastName') }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+91 98765 43210" required value="{{ craft.app.request.getBodyParam('phoneNumber') }}">
+          </div>
+          <div class="form-group">
+            <label for="emailAddress">Email Address</label>
+            <input type="email" id="emailAddress" name="emailAddress" placeholder="hello@example.com" required value="{{ craft.app.request.getBodyParam('emailAddress') }}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="serviceInterestedIn">Service Interested In</label>
+          <select id="serviceInterestedIn" name="serviceInterestedIn">
+            <option value="">Select a Service</option>
+            {% set selectedService = craft.app.request.getBodyParam('serviceInterestedIn') %}
+            <option value="Wedding Videography"{{ selectedService == 'Wedding Videography' ? ' selected' : '' }}>Wedding Videography</option>
+            <option value="Wedding Photography"{{ selectedService == 'Wedding Photography' ? ' selected' : '' }}>Wedding Photography</option>
+            <option value="Pre-Wedding Shoot"{{ selectedService == 'Pre-Wedding Shoot' ? ' selected' : '' }}>Pre-Wedding Shoot</option>
+            <option value="Video Editing"{{ selectedService == 'Video Editing' ? ' selected' : '' }}>Video Editing</option>
+            <option value="Album Designing"{{ selectedService == 'Album Designing' ? ' selected' : '' }}>Album Designing</option>
+            <option value="Brand Development"{{ selectedService == 'Brand Development' ? ' selected' : '' }}>Brand Development</option>
+            <option value="Graphic Design"{{ selectedService == 'Graphic Design' ? ' selected' : '' }}>Graphic Design</option>
+            <option value="Web Development"{{ selectedService == 'Web Development' ? ' selected' : '' }}>Web Development</option>
+            <option value="Commercial Shoot"{{ selectedService == 'Commercial Shoot' ? ' selected' : '' }}>Commercial Shoot</option>
+            <option value="Social Media Content"{{ selectedService == 'Social Media Content' ? ' selected' : '' }}>Social Media Content</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="yourMessage">Your Message</label>
+          <textarea id="yourMessage" name="yourMessage" placeholder="Tell us about your vision, event date, or any specific requirements…">{{ craft.app.request.getBodyParam('yourMessage') }}</textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,150 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  c0c1ae65-fa0c-4df0-b31e-fc73016c86e2:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2026-06-13T07:01:48+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: c43a2cb5-6980-4dd9-b743-8f6fbf644ec2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T07:03:50+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 2cc3a0be-f795-4253-bbfd-5b83cca9e193 # First Name
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 88b60e2a-ed6a-4259-8a25-cc3d4a42239c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T07:03:50+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 707b1b0d-7760-4659-bf18-7586a9da26a9 # Last Name
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b57aaff7-fe75-4669-af74-cb92cc98cbf4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T07:03:50+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 96c9c301-b01e-4b80-a1eb-e699cccf6fdb # Phone Number
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 03938ccd-112c-4de8-bc25-3a81d6eceec6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T07:03:50+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 8a356a46-b3f7-4cb8-a349-7e4387f9186b # Email Address
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 84613ee5-9958-49b1-8202-b9591a38bc84
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T07:03:50+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 272fd44b-678f-44d3-b82a-eb9dee226184 # Service Interested In
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f61d32d8-2d92-44b2-a2b9-8e0bbaddb41d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T07:03:50+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 69119c15-2e6d-4f3e-a83a-c4af23117279 # Your Message
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 60671448-b2b7-4ef3-b0df-84106905f4aa
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 67220911-1b33-4bc5-b247-7bb6001dfbd7
+        userCondition: null
+    thumbFieldKey: null
+handle: submission
+hasTitleField: true
+icon: null
+name: Submission
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

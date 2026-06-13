@@ -1,0 +1,8 @@
+baseUrl: $PRIMARY_SITE_URL
+handle: default
+hasUrls: true
+language: en
+name: 'Golden Haze'
+primary: true
+siteGroup: 048904fd-5846-4c38-a825-8f3684823f63 # Golden Haze
+sortOrder: 1

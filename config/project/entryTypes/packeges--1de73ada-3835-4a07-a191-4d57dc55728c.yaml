@@ -1,0 +1,90 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  a4253395-87a7-4e1d-ab45-13d434cccd91:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-06-13T05:42:40+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 5e0b6541-53f0-47ee-9b91-9d36229cf8c5 # Eyebrow
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ee38f793-e7f1-45f8-a978-c18fc41c1a59
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:42:40+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 93052a8c-5fe1-487f-a1c5-23d838fe6a6e # Heading
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6392e577-3b84-429c-b0ae-8580c9bea053
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:42:40+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 009e1862-eac4-42dd-8bdd-12762c6577ab # Text
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f9b48fd1-ae3d-4508-b443-a45ddd5f6510
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2026-06-13T05:42:40+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 84072257-89e7-4ee1-83dc-176ee501bf67 # Related Packages
+            handle: null
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b5fed2b4-4c18-4ccb-895b-dd5eb2ad206f
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: bef596ab-605a-42d9-82eb-3f76feb454a0
+        userCondition: null
+    thumbFieldKey: null
+handle: packeges
+hasTitleField: false
+icon: null
+name: Packeges
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'

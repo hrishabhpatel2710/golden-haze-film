@@ -1,0 +1,29 @@
+columnSuffix: null
+handle: numberCards
+instructions: null
+name: 'Number Cards'
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  enableVersioning: false
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - e99bef72-132a-42e5-9ad0-023cc523ad78 # Number Card
+        -
+          - group
+          - General
+  includeTableView: false
+  maxEntries: 3
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix
