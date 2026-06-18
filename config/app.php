@@ -34,6 +34,10 @@ return [
     ],
     'bootstrap' => ['contactform'],
     'components' => [
+        'db' => function() {
+            $config = App::dbConfig();
+            return Craft::createObject($config);
+        },
         'mailer' => function() {
             $username = App::env('SMTP_USERNAME') ?: 'filmsgoldenhaze@gmail.com';
             $password = App::env('SMTP_PASSWORD');

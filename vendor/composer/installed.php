@@ -1,15 +1,24 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '5.8.0',
-        'version' => '5.8.0.0',
-        'type' => 'project',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
-        'name' => 'craftcms/craft',
+        'reference' => 'b91dafe38b7332a29133df1ff061e183271256bd',
+        'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => 'b91dafe38b7332a29133df1ff061e183271256bd',
+            'dev_requirement' => false,
+        ),
         'bacon/bacon-qr-code' => array(
             'pretty_version' => 'v3.1.1',
             'version' => '3.1.1.0',
@@ -104,15 +113,6 @@
             'install_path' => __DIR__ . '/../craftcms/cms',
             'aliases' => array(),
             'reference' => 'f781aecea946641c1c66baa5cf4a39872f99e7c6',
-            'dev_requirement' => false,
-        ),
-        'craftcms/craft' => array(
-            'pretty_version' => '5.8.0',
-            'version' => '5.8.0.0',
-            'type' => 'project',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'reference' => NULL,
             'dev_requirement' => false,
         ),
         'craftcms/generator' => array(

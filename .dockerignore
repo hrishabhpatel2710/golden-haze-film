@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.idea
+.vscode
+vendor
+node_modules
+storage/logs
+storage/runtime
+storage/backups
+storage/composer-backups
+storage/config-backups
+*.log
+*.md
+docker-compose*.yml
+Dockerfile
