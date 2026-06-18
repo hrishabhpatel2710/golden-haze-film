@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY composer.json composer.lock ./
 RUN composer install \
+    --ignore-platform-req=ext-bcmath \
+    --ignore-platform-req=ext-gd \
     --no-dev \
     --no-interaction \
     --no-scripts \
