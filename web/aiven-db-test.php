@@ -4,7 +4,7 @@
  * Visit /aiven-db-test.php or run: php web/aiven-db-test.php
  *
  * Download ca.pem from Aiven Console → MySQL service → Overview → CA certificate
- * and save it to storage/certs/ca.pem
+ * and save it to docker/certs/ca.pem
  */
 
 require dirname(__DIR__) . '/bootstrap.php';
@@ -16,7 +16,15 @@ $port = App::env('CRAFT_DB_PORT') ?: '3306';
 $database = App::env('CRAFT_DB_DATABASE');
 $user = App::env('CRAFT_DB_USER');
 $password = App::env('CRAFT_DB_PASSWORD');
-$sslCa = App::env('CRAFT_DB_SSL_CA') ?: dirname(__DIR__) . '/storage/certs/ca.pem';
+$sslCa = App::env('CRAFT_DB_SSL_CA');
+$defaultSslCa = dirname(__DIR__) . '/docker/certs/ca.pem';
+
+foreach (array_unique(array_filter([$sslCa, $defaultSslCa])) as $candidate) {
+    if (is_file($candidate)) {
+        $sslCa = $candidate;
+        break;
+    }
+}
 
 if (!$host || !$user || $password === null || $password === '') {
     exit("Missing database credentials in .env (CRAFT_DB_PASSWORD is required)\n");

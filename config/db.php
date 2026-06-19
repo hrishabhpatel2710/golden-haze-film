@@ -11,6 +11,15 @@ use craft\helpers\App;
 $dbConfig = DbConfig::create();
 
 $sslCa = App::env('CRAFT_DB_SSL_CA');
+$defaultSslCa = (defined('CRAFT_BASE_PATH') ? CRAFT_BASE_PATH : dirname(__DIR__)) . '/docker/certs/ca.pem';
+
+foreach (array_unique(array_filter([$sslCa, $defaultSslCa])) as $candidate) {
+    if (is_file($candidate)) {
+        $sslCa = $candidate;
+        break;
+    }
+}
+
 if ($sslCa && is_file($sslCa)) {
     $attributes = [
         PDO::MYSQL_ATTR_SSL_CA => $sslCa,

@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     environment:
-      CRAFT_DB_SSL_CA: /var/www/html/storage/certs/ca.pem
+      CRAFT_DB_SSL_CA: /var/www/html/docker/certs/ca.pem
     volumes:
       - ./storage:/var/www/html/storage
       - ./web/cpresources:/var/www/html/web/cpresources
