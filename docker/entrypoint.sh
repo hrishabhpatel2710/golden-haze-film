@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+export PORT="${PORT:-8080}"
+
 CERT_DIR="/var/www/html/docker/certs"
 CERT_FILE="${CERT_DIR}/ca.pem"
 
@@ -12,15 +14,11 @@ install_ca_cert() {
     fi
 }
 
-if [ "$(id -u)" = "0" ]; then
-    mkdir -p /var/www/html/storage/runtime /var/www/html/storage/logs "$CERT_DIR" /var/www/html/web/cpresources
-    install_ca_cert
-    chown -R www-data:www-data /var/www/html/storage /var/www/html/web/cpresources
-    exec gosu www-data "$0" "$@"
-fi
-
 mkdir -p /var/www/html/storage/runtime /var/www/html/storage/logs "$CERT_DIR" /var/www/html/web/cpresources
 install_ca_cert
+chown -R www-data:www-data /var/www/html/storage /var/www/html/web/cpresources
+
+envsubst '${PORT}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
 
 if [ ! -s "$CERT_FILE" ]; then
     echo "WARNING: Aiven CA certificate not found at $CERT_FILE" >&2

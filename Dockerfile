@@ -16,7 +16,7 @@ RUN composer install \
 FROM php:8.3-fpm-bookworm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        gosu \
+        gettext-base \
         libicu-dev \
         libzip-dev \
         libpng-dev \
@@ -25,6 +25,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libonig-dev \
         libxml2-dev \
+        nginx \
+        supervisor \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" \
         bcmath \
@@ -38,10 +40,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         pdo_mysql \
         zip \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -f /etc/nginx/sites-enabled/default
 
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/craft.ini
-COPY docker/php/www.conf /usr/local/etc/php-fpm.d/zz-craft.conf
+COPY docker/php/zzz-www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
+COPY docker/php/zzz-global.conf /usr/local/etc/php-fpm.d/zzz-global.conf
+COPY docker/nginx/default.conf.template /etc/nginx/templates/default.conf.template
+COPY docker/supervisord.conf /etc/supervisord.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
@@ -62,7 +68,9 @@ RUN mkdir -p storage/runtime storage/logs web/cpresources docker/certs \
     fi \
     && chown -R www-data:www-data storage web/cpresources
 
-EXPOSE 9000
+ENV PORT=8080
+
+EXPOSE 8080
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
