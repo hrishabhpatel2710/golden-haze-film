@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: golden-haze-film
+    runtime: docker
+    plan: free
+    healthCheckPath: /aiven-db-test.php
+    envVars:
+      - key: CRAFT_APP_ID
+        sync: false
+      - key: CRAFT_ENVIRONMENT
+        value: production
+      - key: CRAFT_SECURITY_KEY
+        sync: false
+      - key: CRAFT_DEV_MODE
+        value: "false"
+      - key: CRAFT_ALLOW_ADMIN_CHANGES
+        value: "false"
+      - key: CRAFT_DISALLOW_ROBOTS
+        value: "false"
+      - key: CRAFT_DB_DRIVER
+        value: mysql
+      - key: CRAFT_DB_SERVER
+        sync: false
+      - key: CRAFT_DB_PORT
+        sync: false
+      - key: CRAFT_DB_DATABASE
+        value: defaultdb
+      - key: CRAFT_DB_USER
+        value: avnadmin
+      - key: CRAFT_DB_PASSWORD
+        sync: false
+      - key: CRAFT_DB_SCHEMA
+        value: ""
+      - key: CRAFT_DB_TABLE_PREFIX
+        value: ""
+      - key: CRAFT_DB_SSL_CA
+        value: /var/www/html/docker/certs/ca.pem
+      - key: CRAFT_DB_SSL_VERIFY
+        value: "true"
+      - key: PRIMARY_SITE_URL
+        value: https://golden-haze-film.onrender.com
+      - key: SYSTEM_EMAIL_FROM
+        sync: false
+      - key: SYSTEM_EMAIL_FROM_NAME
+        value: Golden Haze Films
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
